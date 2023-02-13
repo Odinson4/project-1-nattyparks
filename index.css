@@ -1,5 +1,60 @@
+#navbar {
+  background: #333;
+  color: lightblue;
+  overflow: auto;
+}
+
+
+#navbar a {
+  color: lightblue;
+}
+
+#navbar h1 {
+  float: left;
+  padding-top: 30px;
+}
+
+#navbar ul {
+  list-style: none;
+  float: right;
+}
+
+#navbar ul li {
+  float: left;
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 20px;
+  text-align: center;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: lightblue;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: lightblue;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 .dropbtn {
-  background-color: #04AA6D;
+  background-color: #3498DB;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -7,61 +62,56 @@
   cursor: pointer;
 }
 
-/* Dropdown button on hover & focus */
-.dropbtn:hover,
-.dropbtn:focus {
-  background-color: #3e8e41;
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: lightblue;
 }
 
-
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
+/* parks by state */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
 }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  z-index: 1;
+#parks-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: left;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1
-}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {
-  display: block;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  background-color: #f9f9f9;
+.card {
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin: 16px;
+  text-align: center;
+  padding: 16px;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.show {
-  display: block;
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+  max-width: 15%;
+  height: auto;
 }

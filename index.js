@@ -1,103 +1,96 @@
 
-let stateUrl = `https://developer.nps.gov/api/v1/parks?parkCode=&api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`
-let park;
+const stateSelect = document.querySelector("select");
+const parksList = document.querySelector("#parks-list");
+const parkSection = document.querySelector("#park-section");
 
-function handleDropdownClick(event) {
-  const dropdownContent = document.querySelector('#state');
-  dropdownContent.classList.toggle('show');
-}
-const dropdownButton = document.querySelector('.dropbtn');
-dropdownButton.addEventListener('click', handleDropdownClick);
+const dropdownButton = document.querySelector(".dropbtn");
+dropdownButton.addEventListener("click", () => {
+  document.querySelector("#state").classList.toggle("show");
+});
 
+parksList.addEventListener("click", (event) => {
+  const parkId = event.target.dataset.parkId;
+  if (!parkId) return;
+});
 
-function filterParksByState(state, data) {
-  const parksByState = data.data.filter(park => park.states == state);
-  renderParksByState(parksByState);
-}
-
-
-fetch(stateUrl)
-  .then(res => res.json())
-  .then(data => {
-    renderStates(data);
-  })
-
-function renderStates(data) {
-  const allStates = [...new Set(data.data.map(park => park.states))];
-
-  allStates.forEach(state => {
-    const stateBtn = document.createElement('button');
-    stateBtn.textContent = state;
-    stateBtn.addEventListener('click', () => {
-      filterParksByState(state, data);
-      console.log(`You clicked on ${data.data.states}`);
-    });
-
-  });
-}
-
-function renderParksByState(parksByState) {
-  document.querySelector('#park-section').innerHTML = '';
-  parksByState.forEach(park => {
-    const statePark = document.createElement('card');
-    const parkName = document.createElement('h3');
-    parkName.textContent = park.fullName;
-    const parkDescription = document.createElement('p');
-    parkDescription.textContent = park.description;
-    statePark.append(parkName, parkDescription);
-    document.querySelector('#park-section').append(statePark);
-  });
-}
-
-
-const stateSelect = document.querySelector('select');
-const parksList = document.getElementById('parks-list');
-const parkSection = document.getElementById('park-section');
-
-stateSelect.addEventListener('change', (event) => {
+stateSelect.addEventListener("change", (event) => {
   const selectedState = event.target.value;
-  parksList.innerHTML = '';
-  parkSection.innerHTML = '';
-
-  if (!selectedState) {
-    return;
-  }
+  parksList.innerHTML = "";
+  parkSection.innerHTML = "";
 
   fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${selectedState}&api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       const parks = data.data;
-      parks.forEach(park => {
-        const parkItem = document.createElement('li');
-        parkItem.innerHTML = `<a href="#" data-park-id="${park.id}">${park.fullName}</a>`;
+      parks.forEach((park) => {
+        const parkItem = document.createElement("li.card");
+        const address = park.addresses[0];
+        const entranceFees = park.entranceFees[0];
+        const [activity1, activity2, activity3, activity4] = park.activities;
+
+        parkItem.innerHTML = `
+          <img src="${park.images[0].url}"<br><br>
+          <a href="#">${park.fullName}</a>
+          <br>Address: ${address.line1} ${address.city}, ${address.stateCode} ${address.postalCode}
+          <br>Entrance Fees: $${entranceFees.cost}
+          <br>Activities: ${activity1?.name}, ${activity2?.name}, ${activity3?.name}, ${activity4?.name}
+          <br>${park.description}
+        `;
         parksList.appendChild(parkItem);
       });
     });
 });
 
-parksList.addEventListener('click', (event) => {
-  const parkId = event.target.dataset.parkId;
-  if (!parkId) {
-    return;
-  }
 
-  parkSection.innerHTML = '';
+// let stateUrl = `https://developer.nps.gov/api/v1/parks?parkCode=&api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`
+// const stateSelect = document.querySelector('select');
+// const parksList = document.querySelector('#parks-list');
+// const parkSection = document.querySelector('#park-section');
+// let park;
 
-  //   fetch(`https://developer.nps.gov/api/v1/parks/${parkId}?api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const park = data.data[0];
-  //       const parkHeader = document.createElement('h3');
-  //       parkHeader.innerText = park.fullName;
-  //       parkSection.appendChild(parkHeader);
+// function handleDropdownClick() {
+//   const dropdownContent = document.querySelector('#state');
+//   dropdownContent.classList.toggle('show');
+// }
+// const dropdownButton = document.querySelector('.dropbtn');
+// dropdownButton.addEventListener('click', handleDropdownClick);
 
-  //       const parkDescription = document.createElement('p');
-  //       parkDescription.innerText = park.description;
-  //       parkSection.appendChild(parkDescription);
+// parksList.addEventListener('click', (event) => {
+//   const parkId = event.target.dataset.parkId;
+//   if (!parkId) {
+//     return;
+//   }
 
-  //       const parkUrl = document.createElement('a');
-  //       parkUrl.innerText = 'Visit Website';
-  //       parkUrl.href = park.url;
-  //       parkSection.appendChild(parkUrl);
-  //     });
-});
+// })
+
+// // This function allows the user to select a state from the dropdown.
+// // The change event is triggered when the user selects a new state.
+// stateSelect.addEventListener('change', (event) => {
+//   const selectedState = event.target.value;
+//   // This resets the list of parks instead of adding the parks onto the list.
+//   parksList.innerHTML = '';
+//   parkSection.innerHTML = '';
+//   console.log(selectedState);
+
+//   // A fetch that is grabbing the data for the selected state.
+//   fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${selectedState}&api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`)
+//     .then(response => response.json())
+//     .then(data => {
+//       const parks = data.data;
+//       parks.forEach(park => {
+//         console.log(park);
+//         const parkItem = document.createElement('li.card');
+//         // It's grabbing the data for the selected state and displays full name of that park from the array (API)
+//         let address = park.addresses[0];
+//         let entranceFees = park.entranceFees[0]
+//         let activity1 = park.activities[0];
+//         let activity2 = park.activities[1];
+//         let activity3 = park.activities[2];
+//         let activity4 = park.activities[3];
+//         parkItem.innerHTML = `<img src="${park.images[0].url}"<br> <a href="#">${park.fullName}</a> <br>Address: ${address.line1} ${address.city}, ${address.stateCode} ${address.postalCode}<br> Entrance Fees: $${entranceFees.cost}<br>Activities: ${activity1?.name}, ${activity2?.name}, ${activity3?.name}, ${activity4?.name} <br>${park.description}`;
+//         // Appending the park item to the parkSection.
+//         parksList.appendChild(parkItem);
+//       });
+//     });
+// });
+
