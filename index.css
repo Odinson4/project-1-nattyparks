@@ -1,22 +1,28 @@
-#navbar {
-  background: lightslategray;
-  color: lightslategray;
-  overflow: auto;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 body {
   font-family: Arial, sans-serif;
-  background-size: cover;
+  /* background-size: cover; */
+}
+
+h1 {
+  font-family: 'Monoton', cursive;
+  font-size: 36px;
+  font-weight: 300;
+}
+
+h2 {
+  font-family: 'Monoton', cursive;
+  font-size: 28px;
+  font-weight: 400;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: lightblue;
-  min-width: 160px;
+  width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
@@ -24,13 +30,13 @@ body {
 }
 
 .dropbtn {
-  font-family: sans-serif;
-  font-weight: 800;
-  background-color: black;
-  color: white;
+  font-family: 'Monoton', cursive;
+  font-weight: 400;
+  background-color: rgb(213, 163, 96);
+  color: black;
   width: 180px;
-  padding: 25px;
-  font-size: 25px;
+  padding: 15px;
+  font-size: 36px;
   border: none;
   cursor: pointer;
 }
@@ -41,7 +47,8 @@ select {
   font-size: 16px;
   border: none;
   border-radius: 8px;
-  background-color: lightblue;
+  color: white;
+  background-color: rgb(180, 77, 36);
 }
 
 /* parks by state */
@@ -54,29 +61,32 @@ select {
 #parks-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 30px;
 }
 
 
 
 a {
+  font-family: 'Monoton', cursive;
+  font-size: 20px;
   color: #3498DB;
 }
 
 card img {
-  max-width: 40%;
-  border-radius: 5px;
-  height: auto;
+  padding-top: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 card {
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  display: inline-block;
-  padding: 10px;
-  width: 350px;
-  height: 350px;
+  color: black;
+  background-color: rgb(213, 163, 96);
+  /* cursor: pointer; */
+  padding: 5px;
+  width: auto;
+  height: auto;
   margin: 10px;
   box-shadow: 2px 2px 5px #333;
   text-align: center;
@@ -84,7 +94,8 @@ card {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  /* transition: height 100ms ease-in-out; */
+  transform-origin: top;
 }
 
 card:hover {
@@ -93,13 +104,27 @@ card:hover {
 }
 
 .bg {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
   opacity: 0.9;
   top: 0;
   left: 0;
   min-width: 100%;
-  min-height: 10%;
+  min-height: 100%;
   z-index: -1;
+}
+
+.hide {
+  display: none;
+}
+
+.website {
+  font-family: 'Monoton', cursive;
+  font-weight: 700;
+  background-color: rgb(213, 163, 96);
+  color: black;
+  width: 180px;
+  padding: 15px;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
 }
