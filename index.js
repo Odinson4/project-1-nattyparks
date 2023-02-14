@@ -20,9 +20,7 @@ stateSelect.addEventListener("change", (event) => {
       parks.forEach((park) => {
         const parkItem = createParkCard(park);
         parksList.appendChild(parkItem);
-        const card = parkItem.querySelector('.card');
-        const cardDescription = parkItem.querySelector('.card-text');
-        addCardEventListeners(card, cardDescription);
+        addCardEventListeners(parkItem); // Add event listeners to the park item
       });
     });
 });
@@ -55,7 +53,10 @@ function createParkCard(park) {
   return parkItem;
 }
 
-function addCardEventListeners(card, cardDescription) {
+function addCardEventListeners(parkItem) {
+  const card = parkItem.querySelector('.card');
+  const cardDescription = parkItem.querySelector('.card-text');
+
   card.addEventListener('mouseover', () => {
     cardDescription.classList.remove('hide');
   });
