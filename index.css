@@ -27,6 +27,13 @@ nav .logo {
   color: white;
 }
 
+nav button {
+  font-weight: 800;
+  font-size: 28px;
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
 nav .i {
   color: white;
   font-size: 30px;
@@ -66,10 +73,11 @@ nav .i {
   width: 180px;
 }
 
+/* 
 .dropbtn:hover,
 .dropdown-content {
   display: block;
-}
+} */
 
 .dropbtn {
   font-family: 'Bungee Shade', cursive;
@@ -85,15 +93,16 @@ nav .i {
   cursor: pointer;
 }
 
-.dropdown:hover #state select {
+.dropdown:hover select {
   display: block;
+  cursor: pointer;
 }
 
 select {
-  display: none;
+  display: block;
   width: 100px;
   padding: auto;
-  margin: auto;
+  margin: 0 10px;
   font-size: 12px;
   border: none;
   border-radius: 5px;
