@@ -1,20 +1,25 @@
+// Select DOM elements we will need to reference later
 const stateSelect = document.querySelector("select");
 const parksList = document.querySelector("#parks-list");
 const dropdownButton = document.querySelector(".dropbtn");
 
+// Add an event listener to the dropdown button to toggle the "show" class on the dropdown menu
 dropdownButton.addEventListener("click", () => {
   document.querySelector("#state").classList.toggle("show");
 });
 
+// Add an event listener to the parks list to handle clicks on individual parks
 parksList.addEventListener("click", (event) => {
   const parkId = event.target.dataset.parkId;
   if (!parkId) return;
 });
 
+// Add an event listener to the state select element to render parks for the selected state
 stateSelect.addEventListener("change", (event) => {
   const selectedState = event.target.value;
+  // Clear the parks list element
   parksList.innerHTML = "";
-
+  // Call the renderParks function with the selected state to fetch and display park data
   renderParks(selectedState)
     .then((parks) => {
       parks.forEach((park) => {
@@ -24,17 +29,26 @@ stateSelect.addEventListener("change", (event) => {
     });
 });
 
+// Define a function to fetch park data for a given state code
 function renderParks(stateCode) {
+  // Fetch park data from the NPS API using the provided state code and API key
   return fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&api_key=feZhEue5BDxWEdkf9Uajlf4ervRQKQWzOswrWVoa&limit=500`)
     .then((response) => response.json())
     .then((data) => data.data);
 }
 
+// Define a function to create a park card element for a given park object
 function createParkCard(park) {
+  // Get the park's address and entrance fees data for display in the card
   const address = park.addresses[0];
   const entranceFees = park.entranceFees[0];
+  const activity1 = park.activities[0];
+  const activity2 = park.activities[1];
+  const activity3 = park.activities[2];
 
+  // Create a new div element to hold the park card
   const parkItem = document.createElement("div");
+  // Add a "card" class to the park item element for styling
   parkItem.classList.add("card");
   parkItem.innerHTML = `<div class="flip-card">
     <div class="flip-card-inner">
@@ -42,16 +56,24 @@ function createParkCard(park) {
     <div class="carousel-container">
     <img id="park-image-${park.id}" src="${park.images[0].url}">
     </div>
-    <h2>${park.fullName}</h2>
+    <h2>${park.fullName.toUpperCase()}</h2>
     </div>
     <div class="flip-card-back">
     <p class="card-text">
+    Park Code: ${park.parkCode}
+    <br>
     Address: ${address.line1} ${address.city}, ${address.stateCode} ${address.postalCode}
     <br>
     Entrance Fees: $${entranceFees?.cost}
     <br>
+    Activites: ${activity1?.name}, ${activity2?.name}, ${activity3?.name}
     </p>
-    <a href="${park.url}" class="website">WEBSITE</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="${park.url}" class="button-link">Visit Website</a>
     </div>
     </div>
   </div>`;
@@ -68,9 +90,7 @@ function createParkCard(park) {
 }
 
 const randomParkButton = document.getElementById("random-park-button");
-
-// Add an event listener to the button element
-randomParkButton.addEventListener("click", getRandomPark);
+randomParkButton.addEventListener("dblclick", getRandomPark);
 
 // Define the getRandomPark function
 function getRandomPark() {

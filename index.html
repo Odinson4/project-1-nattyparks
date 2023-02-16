@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="/index.css">
   <script defer src="/index.js"></script>
   <nav class="navbar">
-    <button id="random-park-button">EXPLORE</button>
-    <i class="fa-solid fa-mountain-sun"></i>
     <h1 class="logo">---Natty Parks---</h1>
 
   </nav>
@@ -24,12 +22,16 @@
 
 <body>
   <header>
+    <div>
+      <button id="random-park-button"><i class="fa-solid fa-mountain-sun"></i> EXPLORE <i
+          class="fa-solid fa-mountain-sun"></i></button>
+    </div>
     <div id="banner-bg">
-      <img class="bg" src="https://source.unsplash.com/random/?nature" alt="">
+      <img id="bg" class="kenburns-top" src="https://source.unsplash.com/random/?mountains" alt="">
     </div>
     <div class="dropdown">
-      <button class="dropbtn">States</button>
-      <i class="fa-solid fa-map-location"></i>
+      <button class="dropbtn"><i class="fa-solid fa-map-location"></i> States <i
+          class="fa-solid fa-map-location"></i></button>
       <div id="state" class="dropdown-content">
         <select>
           <option>Select A State...</option>
@@ -91,7 +93,6 @@
   <div class="container">
     <section>
       <div id="parks-by-state">
-        <h2>Parks by State</h2>
         <div id="parks-list">
 
         </div>
